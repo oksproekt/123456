@@ -1,1 +1,139 @@
-<h1>Проект по ОКС</h1>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Проект по ОКС</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Проект по ОКС</h1>
+    </div>
+    <div>
+        <h2>Создать репозиторий github (или аналог), настроить пару ключей для доступа</h2>
+        <ol>
+        <li>Создали аккаунт oksproekt  на github.</li>
+        <li>Создали репозиторий 123456 в нашем аккаунте.</li>
+        <li>В репозитории размещен один файл README.md</li>
+ 
+    <img src="img/inage001.png" alt="Создание репозитория">
+    <li>На компьютере установили программу Git Bash</li> 
+    <img src="img/inage002.png" alt="Установка Git BAsh">
+
+    <li>Осуществили начальную настройку параметров программы Git Bash, просмотрели содержимое текущей папки</li>
+    <div class="kod">
+     git config --global user.name "oksproekt"<br>
+     git config --global user.email "merkoks@internet.ru"<br>
+     </div>
+    <img src="img/003.png" alt="Просмотр содержимого папки"> <br>
+    <p>Создали новую папку add, инициализировали её как локальный репозиторий</p>
+    <div class="kod">
+    mkdir OKS <br>
+    cd OKS<br>
+    git init<br>
+       </div>
+       <img src="img/image004.png" alt="Инициализация репозитория"> <br><br>
+    <li> Создали пару SSH-ключей (приватный – SSH1, публичный – SSH1.pub)</li>
+    <div class="kod">ssh-keygen -t ed25519</div>
+    <img src="img/image005.png" alt="Создание ключей"> <br><br>   
+    <li>Добавили в раздел <a href="https://github.com/settings/keys"> https://github.com/settings/keys </a>  информацию для SSH keys, содержащуюся в ранее созданном файле SSH1.pub</li>
+    <img src="img/imges007.png" alt="Подключение публичного ключа"> <br><br>   
+    <li>Подключили локальный репозиторий к GitHub </li> 
+    <div class="kod">
+    git remote add origin git@github.com:oksproekt/123456.git
+    </div>
+    <li> Клонировали репозиторий oksproekt на компьютер </li>
+    <div class="kod">
+    git clone git@github.com:oksproekt/123456.git
+</div>
+<img src="img/image008.png" alt="Клонирование репозитория на компьютер"> <br>
+
+</ol>
+</div>
+    <br><br>
+<div>
+    <h2>Конфигурирование устройств сети</h2>
+<ol>
+    <li>Настроить PC</li>
+    <p>Для настройки компьютеров, выбираем соответствующий хост. На вкладке Config в разделе FastEthernet в полях Ipv4 Address и Subnet Mask прописываем 
+        необходимые сетевые конфигурации. Далее выбираем в этой же вкладке раздел Settings и в поле Default Gateway указываем адрес 
+        соответствующего интерфейса маршрутизатора, к которому подключен коммутатор.
+    Для host_1:</p>
+    <img src="img/image010.png" > 
+    <img src="img/image011.png" > <br> 
+   <p> Для host_2:</p>
+   <img src="img/image012.png" > 
+   <img src="img/image013.png" > <br> 
+   <p> Для host_3:</p>
+   <img src="img/image014.png" > 
+   <img src="img/image015.png" > <br> 
+   <p> Для host_4:</p>
+   <img src="img/image016.png" > 
+   <img src="img/image017.png" > <br> 
+
+<li> Настроить маршрутизатор Merkulova</li>
+<p>Нажимаем на изображение маршрутизатора. Выбираем вкладку CLI. Нажимаем Enter и набираем следующую последовательность команд для конфигурирования интерфейсов маршрутизатора:</p>
+<div class="kod">
+    //для входа в маршрутизатор<br> 
+    Router>enable<br> 
+    //для входа в режим конфигурирования маршрутизатора<br> 
+    Router#config terminal<br> 
+    Enter configuration commands, one per line. End with CNTL/Z.<br> 
+    // изменение имени хоста<br> 
+    Router(config)#hostname Merkulova<br> 
+    Merkulova(config)#<br> 
+    // выбор интерфейса маршрутизатора<br> 
+    Merkulova(config)#interface fa0/0<br> 
+    //установка IP-адреса интерфейса<br> 
+    Merkulova(config-if)#ip address 192.168.1.1 255.255.255.0<br> 
+    // запрет выключения интерфейса<br> 
+    Merkulova(config-if)#no shutdown<br> 
+    // выход из конфигурирования интерфейса<br> 
+    Merkulova(config-if)#exit<br> 
+    // выбор нового интерфейса маршрутизатора<br> 
+    Merkulova(config)#interface fa0/1<br> 
+    // установка IP-адреса интерфейса<br> 
+    Merkulova(config-if)#ip address 172.16.0.1 255.255.0.0<br> 
+    // запрет выключения интерфейса<br> 
+    Merkulova(config-if)#no shutdown<br> 
+    // выход из конфигурирования интерфейса<br> 
+    Merkulova(config-if)#exit<br> 
+    //выход из режима конфигурирования маршрутизатора<br> 
+    Merkulova(config)#exit<br> 
+    Merkulova#<br> 
+    %SYS-5-CONFIG_I: Configured from console by console<br> 
+    //запись текущей конфигурации в память маршрутизатора<br> 
+    Merkulova#write memory<br> 
+    Building configuration...<br> 
+    [OK]<br> 
+
+    <p>В результате получим:</p>
+    <img src="img/image018.png" > <br> 
+<li>Проверка связности между двумя сегментами сети командой ping</li>
+<p>Выполним пинг с host_1 до всех других устройств</p>
+<img src="img/image019.png" > <br> 
+<p>Выполним пинг с host_3 до всех других устройств:</p>
+<img src="img/image020.png" > <br> 
+<p>Видно, что все пинги проходят. Все устройства связаны между собой!</p>
+</div>
+
+<div>
+    <h2>Создание веб-страниц с использованием HTML и CSS</h2>
+<p>CSS (Cascading Style Sheets) показывает браузеру, какие свойства есть у определенных элементов на странице: шрифт текста, размер изображений и блоков.
+    <br>
+    HTML-элементы — основа языка HTML. 
+    Каждый HTML-документ состоит из дерева HTML-элементов и текста. Каждый HTML-элемент обозначается начальным (открывающим) и конечным (закрывающим) тегом. Открывающий и закрывающий теги содержат имя элемента.
+    </p>
+
+
+
+
+
+
+
+</ol>
+
+
+
+</div>
+</body>
+</html>
