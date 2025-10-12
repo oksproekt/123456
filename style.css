@@ -1,0 +1,35 @@
+h1 {
+    font-family: "Arial", sans-serif;
+    font-size: 50px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+   }
+h2 {
+    font-family: "Arial", sans-serif;
+    font-size: 30px;
+    color: #372af1;
+    text-align: center;
+    margin-bottom: 20px;
+   }
+li {
+    font-family: "Arial";
+    font-size: 20px;
+    color: #333;
+    text-align: left;
+    margin-bottom: 5px;
+}
+.kod{
+    font-family: "Calibri", sans-serif;
+    font-size: 20px;
+    color: #050000;
+    text-align: left;
+    margin-bottom: 5px;
+}
+p {
+    font-family: "Arial", sans-serif;
+    font-size: 20px;
+    color: #333;
+    text-align: left;
+    margin-bottom: 10px;
+   }
